@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:55:38 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 17:25:42 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:02:16 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,21 @@ void	eat(t_philo *philo)
 	print_mutex(philo, "has taken right fork");
 	philo->is_eating = 1;
 	philo->nb_meals++;// still need to fix if it checks that if time is over but he is eating
+	print_mutex(philo, "is eating");
 	ft_usleep(philo->args->time_to_eat);
 	philo->last_meal = get_precise_time();
-	print_mutex(philo, "is eating");
+	philo->is_eating = 0;
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 }
 
+void	ft_sleep(t_philo *philo)
+{
+	print_mutex(philo, "is sleeping");
+	ft_usleep(philo->args->time_to_sleep);
+}
+
+void	think(t_philo *philo)
+{
+	print_mutex(philo, "is thinking");
+}

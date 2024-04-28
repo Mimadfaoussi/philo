@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:41:28 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 16:54:05 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:05:15 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	*routine(void *arg)
 		ft_usleep(philo->args->time_to_eat / 2);
 	while (not_dead(philo) == 0)
 	{
-		// eat();
-		// ft_sleep();
-		// think();
-		printf("my id is %d and i am not dead\n",philo->id);
-		ft_usleep(200);
+		eat(philo);
+		ft_sleep(philo);
+		think(philo);
+		// printf("my id is %d and i am not dead\n",philo->id);
+		// ft_usleep(200);
 	}
 	return (NULL);
 }
