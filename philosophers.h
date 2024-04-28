@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:07:06 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 18:02:51 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/04/28 19:33:54 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,13 @@ void		data_init(t_data *data, pthread_mutex_t *forks, t_philo *philos);
 void		philo_init(t_philo *philos, t_args *args, t_data *data);
 
 
-void		threads_start(t_philo *philo, t_data *data);
+void		threads_philos(t_philo *philo, t_data *data);
 void		eat(t_philo *philo);
 int			not_dead(t_philo *philo);
 void		ft_sleep(t_philo *philo);
 void		think(t_philo *philo);
+void		print_mutex(t_philo *philo, char *str);
+void		threads_checker(t_philo *philo);
 
 
 #endif
