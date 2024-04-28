@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 13:11:47 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 15:24:15 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:48:37 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	philo_init(t_philo *philos, t_args *args, t_data *data)
 		philos[i].id = i + 1;
 		philos[i].is_eating = 0;
 		philos[i].nb_meals = 0;
-		philos[i].is_dead = 0;
+		philos[i].is_dead = &data->dead;
 		philos[i].start_time = get_precise_time();
 		philos[i].last_meal = get_precise_time();
 		philos[i].left_fork = &data->forks[i];

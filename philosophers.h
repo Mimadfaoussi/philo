@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:07:06 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 15:20:23 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:22:23 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_philo
 	pthread_t				thread;
 	int						is_eating;
 	int						nb_meals;
-	int						is_dead;
+	int						*is_dead;
 	u_int64_t				start_time;
 	u_int64_t				last_meal;
 	pthread_mutex_t			*left_fork;
@@ -80,6 +80,7 @@ void		data_init(t_data *data, pthread_mutex_t *forks, t_philo *philos);
 void		philo_init(t_philo *philos, t_args *args, t_data *data);
 
 
+void		threads_start(t_philo *philo, t_data *data);
 
 
 #endif
