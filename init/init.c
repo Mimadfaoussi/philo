@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 13:11:47 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 15:20:17 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:24:15 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	data_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 {
 	data->dead = 0;
 	pthread_mutex_init(&data->dead_mutex, NULL);
-	pthread_mutex_init(&data->dead_mutex, NULL);
+	pthread_mutex_init(&data->print_mutex, NULL);
 	data->forks = forks;
 	data->philos = philos;
 }
