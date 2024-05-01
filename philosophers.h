@@ -81,14 +81,31 @@ void		forks_init(pthread_mutex_t *forks, t_args *args);
 void		data_init(t_data *data, pthread_mutex_t *forks, t_philo *philos);
 void		philo_init(t_philo *philos, t_args *args, t_data *data);
 
+/*** starting threads */
 
 void		threads_philos(t_philo *philo, t_data *data);
-void		eat(t_philo *philo);
+int			thread_creation(t_philo *philo);
+int			thread_joining(t_philo *philo);
+
+/*** checker  ***/
+
+void		*checker_routine(void *arg);
+void		check_all_ate(t_philo *philo);
+void		check_all_died(t_philo *philo);
 int			not_dead(t_philo *philo);
+
+/*** actions */
+
+void		set_dead(t_philo *philo);
+void		print_mutex(t_philo *philo, char *str);
+void		put_forks(t_philo *philo);
+void		update_meal(t_philo *philo);
+void		set_dead(t_philo *philo);
+
+/*** routines */
+void		*routine(void *arg);
 void		ft_sleep(t_philo *philo);
 void		think(t_philo *philo);
-void		print_mutex(t_philo *philo, char *str);
-// void		threads_checker(t_philo *philo);
-
+void		eat(t_philo *philo);
 
 #endif

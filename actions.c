@@ -39,33 +39,9 @@ void	update_meal(t_philo *philo)
 	pthread_mutex_unlock(philo->eat_mutex);
 }
 
-void	eat(t_philo *philo)
+void	set_dead(t_philo *philo)
 {
-	pthread_mutex_lock(philo->left_fork);
-	print_mutex(philo, "has taken a fork");
-	if (philo->args->nb_philos == 1)
-	{
-		ft_usleep(philo->args->time_to_die);
-		pthread_mutex_unlock(philo->left_fork);
-		return ;
-	}
-	pthread_mutex_lock(philo->right_fork);
-	print_mutex(philo, "has taken a fork");
-	philo->is_eating = 1;
-	print_mutex(philo, "is eating");
-	update_meal(philo);
-	ft_usleep(philo->args->time_to_eat);
-	philo->is_eating = 0;
-	put_forks(philo);
-}
-
-void	ft_sleep(t_philo *philo)
-{
-	print_mutex(philo, "is sleeping");
-	ft_usleep(philo->args->time_to_sleep);
-}
-
-void	think(t_philo *philo)
-{
-	print_mutex(philo, "is thinking");
+	pthread_mutex_lock(philo->dead_mutex);
+	*(philo->is_dead) = 1;
+	pthread_mutex_unlock(philo->dead_mutex);
 }

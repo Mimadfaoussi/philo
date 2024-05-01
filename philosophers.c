@@ -47,6 +47,7 @@ int	main(int argc, char **argv)
 	data_init(&data, forks, philos);
 	philo_init(philos, &args, &data);
 	threads_philos(philos, &data);
+	// printf("finished successfully \n");
 	// printall(philos);
 }
 
