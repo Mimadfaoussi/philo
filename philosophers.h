@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:07:06 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/05/01 16:33:10 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:59:58 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,12 @@ void		ft_usleep(u_int64_t	time_to_wait);
 
 /*** init and destroy  ***/
 void		args_init(t_args *args, int argc, char **argv);
-void		forks_init(pthread_mutex_t *forks, t_args *args);
-void		data_init(t_data *data, pthread_mutex_t *forks, t_philo *philos);
+int			forks_init(pthread_mutex_t *forks, t_args *args);
+int			data_init(t_data *data, pthread_mutex_t *forks, t_philo *philos);
 void		philo_init(t_philo *philos, t_args *args, t_data *data);
 void		destroy_all(pthread_mutex_t *forks, t_data *data);
+void		destroy_forks(pthread_mutex_t *forks, t_data *data);
+void		destroy_data(t_data *data);
 
 /*** starting threads */
 
