@@ -25,6 +25,20 @@ void	print_mutex(t_philo *philo, char *str)
 	}
 }
 
+void	put_forks(t_philo *philo)
+{
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
+}
+
+void	update_meal(t_philo *philo)
+{
+	pthread_mutex_lock(philo->eat_mutex);
+	philo->nb_meals++;
+	philo->last_meal = get_precise_time();
+	pthread_mutex_unlock(philo->eat_mutex);
+}
+
 void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
@@ -38,13 +52,11 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(philo->right_fork);
 	print_mutex(philo, "has taken right fork");
 	philo->is_eating = 1;
-	philo->nb_meals++;// still need to fix if it checks that if time is over but he is eating
 	print_mutex(philo, "is eating");
+	update_meal(philo);
 	ft_usleep(philo->args->time_to_eat);
-	philo->last_meal = get_precise_time();
 	philo->is_eating = 0;
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
+	put_forks(philo);
 }
 
 void	ft_sleep(t_philo *philo)
