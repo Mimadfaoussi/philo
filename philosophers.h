@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:07:06 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 19:33:54 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:46:31 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,10 @@ int			ft_atoi(const char *str);
 int			check_input(int argc, char **argv);
 void		args_init(t_args *args, int argc, char **argv);
 
-
 /***  time **** */
 
 u_int64_t	get_precise_time(void);
 void		ft_usleep(u_int64_t	time_to_wait);
-
 
 /*** init ***/
 void		args_init(t_args *args, int argc, char **argv);
@@ -101,6 +99,7 @@ void		print_mutex(t_philo *philo, char *str);
 void		put_forks(t_philo *philo);
 void		update_meal(t_philo *philo);
 void		set_dead(t_philo *philo);
+void		update_meal_time(t_philo *philo);
 
 /*** routines */
 void		*routine(void *arg);

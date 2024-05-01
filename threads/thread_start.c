@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:41:28 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 19:37:50 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:47:10 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,4 @@ void	threads_philos(t_philo *philo, t_data *data)
 		printf("y_error\n");
 		return ;
 	}
-	// printf("finished successfully \n");
 }
-

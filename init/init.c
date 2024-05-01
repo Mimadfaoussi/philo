@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 13:11:47 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 16:48:37 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:46:46 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	forks_init(pthread_mutex_t *forks, t_args *args)
 		i++;
 	}
 }
-
 
 void	philo_init(t_philo *philos, t_args *args, t_data *data)
 {

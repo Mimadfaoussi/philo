@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_start.c                                     :+:      :+:    :+:   */
+/*   checker_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:41:28 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 19:37:50 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:46:56 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	not_dead(t_philo *philo)
 
 void	check_all_died(t_philo *philo)
 {
-	int		i;
+	int			i;
 	u_int64_t	time;
 
 	i = 0;
@@ -72,8 +72,6 @@ void	check_all_ate(t_philo *philo)
 void	*checker_routine(void *arg)
 {
 	t_philo		*philo;
-	// int			i;
-	// u_int64_t	time;
 
 	philo = (t_philo *)arg;
 	while (not_dead(philo) == 0)

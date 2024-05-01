@@ -6,29 +6,29 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:40:56 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/04/28 19:35:23 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:47:56 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	printall(t_philo *philo)
-{
-	int	i;
+// void	printall(t_philo *philo)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < philo->args->nb_philos)
-	{
-		printf("philo id : %d\n",philo[i].id);
-		printf("philo is_eating : %d\n",philo[i].is_eating);
-		printf("philo nb_meals : %d\n",philo[i].nb_meals);
-		printf("philo left_fork : %p\n",philo[i].left_fork);
-		printf("philo right_fork : %p\n",philo[i].right_fork);
-		printf("philo start_time : %lu\n",philo[i].start_time);
-		printf("---------------------------\n");
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < philo->args->nb_philos)
+// 	{
+// 		printf("philo id : %d\n",philo[i].id);
+// 		printf("philo is_eating : %d\n",philo[i].is_eating);
+// 		printf("philo nb_meals : %d\n",philo[i].nb_meals);
+// 		printf("philo left_fork : %p\n",philo[i].left_fork);
+// 		printf("philo right_fork : %p\n",philo[i].right_fork);
+// 		printf("philo start_time : %llu\n",philo[i].start_time);
+// 		printf("---------------------------\n");
+// 		i++;
+// 	}
+// }
 
 int	main(int argc, char **argv)
 {
@@ -47,8 +47,4 @@ int	main(int argc, char **argv)
 	data_init(&data, forks, philos);
 	philo_init(philos, &args, &data);
 	threads_philos(philos, &data);
-	// printf("finished successfully \n");
-	// printall(philos);
 }
-
-
