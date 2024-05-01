@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:41:28 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/05/01 14:46:56 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:25:17 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	check_all_died(t_philo *philo)
 		pthread_mutex_lock(philo->eat_mutex);
 		time = get_precise_time() - philo[i].last_meal;
 		pthread_mutex_unlock(philo->eat_mutex);
-		if (time >= philo->args->time_to_die)
+		if (time > philo->args->time_to_die)
 		{
 			print_mutex(&philo[i], "died");
 			set_dead(philo);
@@ -58,13 +58,14 @@ void	check_all_ate(t_philo *philo)
 	while (i < philo->args->nb_philos)
 	{
 		pthread_mutex_lock(philo->eat_mutex);
-		if (philo[i].nb_meals == philo->args->nb_meals)
+		if (philo[i].nb_meals >= philo->args->nb_meals)
 			all_ate++;
 		pthread_mutex_unlock(philo->eat_mutex);
 		i++;
 	}
 	if (all_ate == philo->args->nb_philos)
 	{
+		usleep(1000);
 		set_dead(philo);
 	}
 }
@@ -76,8 +77,8 @@ void	*checker_routine(void *arg)
 	philo = (t_philo *)arg;
 	while (not_dead(philo) == 0)
 	{
-		check_all_died(philo);
 		check_all_ate(philo);
+		check_all_died(philo);
 	}
 	return (NULL);
 }
