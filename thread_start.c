@@ -52,50 +52,68 @@ void	*routine(void *arg)
 // 	return (0);
 // }
 
-// int	check_all(t_philo *philo)
-// {
-// 	int		i;
+void	set_dead(t_philo *philo)
+{
+	pthread_mutex_lock(philo->dead_mutex);
+	*(philo->is_dead) = 1;
+	pthread_mutex_unlock(philo->dead_mutex);
+}
 
-// 	i = 0;
-// 	while (i < philo->args->nb_philos)
-// 	{
-// 		if (philo_is_dead(&philo[i]) == 1)
-// 		{
-// 			pthread_mutex_lock(philo->dead_mutex);
-// 			print_mutex(&philo[i], "is dead");
-// 			*(philo->is_dead) = 1;
-// 			pthread_mutex_unlock(philo->dead_mutex);
-// 			return (1);
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
+void	check_all_died(t_philo *philo)
+{
+	int		i;
+	u_int64_t	time;
+
+	i = 0;
+	while (i < philo->args->nb_philos)
+	{
+		pthread_mutex_lock(philo->eat_mutex);
+		time = get_precise_time() - philo[i].last_meal;
+		pthread_mutex_unlock(philo->eat_mutex);
+		if (time >= philo->args->time_to_die)
+		{
+			print_mutex(&philo[i], "died");
+			set_dead(philo);
+			return ;
+		}
+		i++;
+	}
+	return ;
+}
+void	check_all_ate(t_philo *philo)
+{
+	int	i;
+	int	all_ate;
+
+	if (philo->args->nb_meals == -1)
+		return ;
+	all_ate = 0;
+	i = 0;
+	while (i < philo->args->nb_philos)
+	{
+		pthread_mutex_lock(philo->eat_mutex);
+		if (philo[i].nb_meals == philo->args->nb_meals)
+			all_ate++;
+		pthread_mutex_unlock(philo->eat_mutex);
+		i++;
+	}
+	if (all_ate == philo->args->nb_philos)
+	{
+		set_dead(philo);
+	}
+}
 
 void	*checker_routine(void *arg)
 {
 	t_philo		*philo;
-	int			i;
-	u_int64_t	time;
+	// int			i;
+	// u_int64_t	time;
 
 	philo = (t_philo *)arg;
 	while (not_dead(philo) == 0)
 	{
-		i = 0;
-		while (i < philo->args->nb_philos)
-		{
-			pthread_mutex_lock(philo->eat_mutex);
-			time = get_precise_time() - philo[i].last_meal;
-			pthread_mutex_unlock(philo->eat_mutex);
-			if (time >= philo->args->time_to_die)
-			{
-				print_mutex(&philo[i], "is dead");
-				pthread_mutex_lock(philo->dead_mutex);
-				*(philo->is_dead) = 1;
-				pthread_mutex_unlock(philo->dead_mutex);
-			}
-			i++;
-		}
+		check_all_died(philo);
+		check_all_ate(philo);
 	}
 	return (NULL);
 }

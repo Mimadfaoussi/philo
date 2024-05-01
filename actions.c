@@ -42,7 +42,7 @@ void	update_meal(t_philo *philo)
 void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
-	print_mutex(philo, "has taken left fork");
+	print_mutex(philo, "has taken a fork");
 	if (philo->args->nb_philos == 1)
 	{
 		ft_usleep(philo->args->time_to_die);
@@ -50,7 +50,7 @@ void	eat(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_lock(philo->right_fork);
-	print_mutex(philo, "has taken right fork");
+	print_mutex(philo, "has taken a fork");
 	philo->is_eating = 1;
 	print_mutex(philo, "is eating");
 	update_meal(philo);
