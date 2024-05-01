@@ -1,0 +1,26 @@
+0 philo 3 has taken left fork
+0 philo 3 has taken right fork
+0 philo 3 is eating
+0 philo 5 has taken left fork
+0 philo 5 has taken right fork
+0 philo 5 is eating
+100 philo 2 has taken left fork
+200 philo 5 is sleeping
+200 philo 1 has taken left fork
+200 philo 3 is sleeping
+200 philo 4 has taken left fork
+200 philo 4 has taken right fork
+200 philo 4 is eating
+200 philo 2 has taken right fork
+200 philo 2 is eating
+400 philo 2 is sleeping
+400 philo 1 has taken right fork
+400 philo 1 is eating
+400 philo 5 is thinking
+400 philo 5 has taken left fork
+400 philo 4 is sleeping
+400 philo 3 is thinking
+400 philo 3 has taken left fork
+400 philo 3 has taken right fork
+400 philo 3 is eating
+520 philo 5 is dead

@@ -40,46 +40,62 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
-int	philo_is_dead(t_philo *philo)
-{
-	u_int64_t	time;
+// int	philo_is_dead(t_philo *philo)
+// {
+// 	u_int64_t	time;
 
-	time = get_precise_time() - philo->last_meal;
-	if (time >= philo->args->time_to_die)
-	{
-		return (1);
-	}
-	return (0);
-}
+// 	time = get_precise_time() - philo->last_meal;
+// 	if (time >= philo->args->time_to_die)
+// 	{
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
-int	check_all(t_philo *philo)
-{
-	int		i;
+// int	check_all(t_philo *philo)
+// {
+// 	int		i;
 
-	i = 0;
-	while (i < philo->args->nb_philos)
-	{
-		if (philo_is_dead(&philo[i]) == 1)
-		{
-			pthread_mutex_lock(philo->dead_mutex);
-			print_mutex(&philo[i], "is dead");
-			*(philo->is_dead) = 1;
-			pthread_mutex_unlock(philo->dead_mutex);
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (i < philo->args->nb_philos)
+// 	{
+// 		if (philo_is_dead(&philo[i]) == 1)
+// 		{
+// 			pthread_mutex_lock(philo->dead_mutex);
+// 			print_mutex(&philo[i], "is dead");
+// 			*(philo->is_dead) = 1;
+// 			pthread_mutex_unlock(philo->dead_mutex);
+// 			return (1);
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 void	*checker_routine(void *arg)
 {
-	t_philo	*philo;
+	t_philo		*philo;
+	int			i;
+	u_int64_t	time;
 
 	philo = (t_philo *)arg;
-	while (check_all(philo) == 0)
+	while (not_dead(philo) == 0)
 	{
-		continue ;
+		i = 0;
+		while (i < philo->args->nb_philos)
+		{
+			pthread_mutex_lock(philo->eat_mutex);
+			time = get_precise_time() - philo[i].last_meal;
+			pthread_mutex_unlock(philo->eat_mutex);
+			if (time >= philo->args->time_to_die)
+			{
+				print_mutex(&philo[i], "is dead");
+				pthread_mutex_lock(philo->dead_mutex);
+				*(philo->is_dead) = 1;
+				pthread_mutex_unlock(philo->dead_mutex);
+			}
+			i++;
+		}
 	}
 	return (NULL);
 }
@@ -120,10 +136,22 @@ int	thread_joining(t_philo *philo)
 
 void	threads_philos(t_philo *philo, t_data *data)
 {
+	pthread_t	checker;
+
 	if (data->dead == 1)
 		return ;
+	if (pthread_create(&checker, NULL, &checker_routine, philo) != 0)
+	{
+		printf("x_error\n");
+		return ;
+	}
 	thread_creation(philo);
 	thread_joining(philo);
+	if (pthread_join(checker, NULL) != 0)
+	{
+		printf("y_error\n");
+		return ;
+	}
 }
 
 // void	threads_checker(t_philo *philo, t_data *data)
