@@ -24,7 +24,7 @@ void	printall(t_philo *philo)
 		printf("philo nb_meals : %d\n",philo[i].nb_meals);
 		printf("philo left_fork : %p\n",philo[i].left_fork);
 		printf("philo right_fork : %p\n",philo[i].right_fork);
-		printf("philo start_time : %llu\n",philo[i].start_time);
+		printf("philo start_time : %lu\n",philo[i].start_time);
 		printf("---------------------------\n");
 		i++;
 	}

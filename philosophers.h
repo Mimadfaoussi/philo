@@ -42,6 +42,7 @@ typedef struct s_philo
 	u_int64_t				last_meal;
 	pthread_mutex_t			*left_fork;
 	pthread_mutex_t			*right_fork;
+	pthread_mutex_t			*eat_mutex;
 	pthread_mutex_t			*dead_mutex;
 	pthread_mutex_t			*print_mutex;
 	t_args					*args;
@@ -50,6 +51,7 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int						dead;
+	pthread_mutex_t			eat_mutex;
 	pthread_mutex_t			dead_mutex;
 	pthread_mutex_t			print_mutex;
 	pthread_mutex_t			*forks;
@@ -86,7 +88,7 @@ int			not_dead(t_philo *philo);
 void		ft_sleep(t_philo *philo);
 void		think(t_philo *philo);
 void		print_mutex(t_philo *philo, char *str);
-void		threads_checker(t_philo *philo);
+// void		threads_checker(t_philo *philo);
 
 
 #endif

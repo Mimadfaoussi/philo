@@ -20,7 +20,7 @@ void	print_mutex(t_philo *philo, char *str)
 	{
 		time = get_precise_time() - philo->start_time;
 		pthread_mutex_lock(philo->print_mutex);
-		printf("%llu philo %d %s\n", time, philo->id, str);
+		printf("%lu philo %d %s\n", time, philo->id, str);
 		pthread_mutex_unlock(philo->print_mutex);
 	}
 }

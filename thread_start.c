@@ -84,47 +84,61 @@ void	*checker_routine(void *arg)
 	return (NULL);
 }
 
-void	threads_philos(t_philo *philo, t_data *data)
+int	thread_creation(t_philo *philo)
 {
 	int	i;
 
 	i = 0;
-	if (data->dead == 1)
-		return ;
 	while (i < philo->args->nb_philos)
 	{
 		if (pthread_create(&(philo[i].thread), NULL, &routine, &philo[i]) != 0)
 		{
 			printf("x_error\n");
-			return ;
+			return (1);
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	thread_joining(t_philo *philo)
+{
+	int	i;
+
 	i = 0;
 	while (i < philo->args->nb_philos)
 	{
 		if (pthread_join(philo[i].thread, NULL) != 0)
 		{
 			printf("y_error\n");
-			return ;
+			return (1);
 		}
 		i++;
 	}
+	return (0);
 }
 
-void	threads_checker(t_philo *philo, t_data *data)
+void	threads_philos(t_philo *philo, t_data *data)
 {
-	pthread_t	checker;
-
-	if (pthread_create(&checker, NULL, &checker_routine, data) != 0)
-	{
-		printf("error checker\n");
+	if (data->dead == 1)
 		return ;
-	}
-	if (pthread_join(checker, NULL) != 0)
-	{
-		printf("error checker\n");
-		return ;
-	}
-
+	thread_creation(philo);
+	thread_joining(philo);
 }
+
+// void	threads_checker(t_philo *philo, t_data *data)
+// {
+// 	pthread_t	checker;
+
+// 	if (pthread_create(&checker, NULL, &checker_routine, data) != 0)
+// 	{
+// 		printf("error checker\n");
+// 		return ;
+// 	}
+// 	if (pthread_join(checker, NULL) != 0)
+// 	{
+// 		printf("error checker\n");
+// 		return ;
+// 	}
+
+// }

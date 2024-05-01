@@ -55,6 +55,7 @@ void	philo_init(t_philo *philos, t_args *args, t_data *data)
 			philos[i].right_fork = &data->forks[0];
 		else
 			philos[i].right_fork = &data->forks[i + 1];
+		philos[i].eat_mutex = &data->eat_mutex;
 		philos[i].dead_mutex = &data->dead_mutex;
 		philos[i].print_mutex = &data->print_mutex;
 		philos[i].args = args;
@@ -65,6 +66,7 @@ void	philo_init(t_philo *philos, t_args *args, t_data *data)
 void	data_init(t_data *data, pthread_mutex_t *forks, t_philo *philos)
 {
 	data->dead = 0;
+	pthread_mutex_init(&data->eat_mutex, NULL);
 	pthread_mutex_init(&data->dead_mutex, NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	data->forks = forks;
