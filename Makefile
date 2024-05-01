@@ -1,9 +1,14 @@
-NAME	:= philosophers
+NAME	:= philo
 
 CC		:=	cc
-CFLAGS	:=	-Wextra -Wall -Werror
+CFLAGS	:=	-Wextra -Wall -Werror -pthread -g
 
-SRCS	:=	$(wildcard *.c) $(wildcard */*.c)
+SRCS	:=	./errors/check_input.c \
+				./helper_functions/ft_atoi.c ./helper_functions/get_time.c \
+				./init_destroy/destroy.c ./init_destroy/init.c \
+				./threads/actions.c ./threads/checker_routine.c \
+				./threads/philo_routine.c ./threads/thread_start.c \
+				philosophers.c
 
 OBJS	:=	${SRCS:.c=.o}
 
