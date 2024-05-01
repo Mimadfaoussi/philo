@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-
+#include "../philosophers.h"
 
 void	*routine(void *arg)
 {
@@ -29,59 +28,33 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
-
-int	thread_creation(t_philo *philo)
+void	eat(t_philo *philo)
 {
-	int	i;
-
-	i = 0;
-	while (i < philo->args->nb_philos)
+	pthread_mutex_lock(philo->left_fork);
+	print_mutex(philo, "has taken a fork");
+	if (philo->args->nb_philos == 1)
 	{
-		if (pthread_create(&(philo[i].thread), NULL, &routine, &philo[i]) != 0)
-		{
-			printf("x_error\n");
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	thread_joining(t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < philo->args->nb_philos)
-	{
-		if (pthread_join(philo[i].thread, NULL) != 0)
-		{
-			printf("y_error\n");
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-void	threads_philos(t_philo *philo, t_data *data)
-{
-	pthread_t	checker;
-
-	if (data->dead == 1)
-		return ;
-	if (pthread_create(&checker, NULL, &checker_routine, philo) != 0)
-	{
-		printf("x_error\n");
+		ft_usleep(philo->args->time_to_die);
+		pthread_mutex_unlock(philo->left_fork);
 		return ;
 	}
-	thread_creation(philo);
-	thread_joining(philo);
-	if (pthread_join(checker, NULL) != 0)
-	{
-		printf("y_error\n");
-		return ;
-	}
-	// printf("finished successfully \n");
+	pthread_mutex_lock(philo->right_fork);
+	print_mutex(philo, "has taken a fork");
+	philo->is_eating = 1;
+	print_mutex(philo, "is eating");
+	update_meal(philo);
+	ft_usleep(philo->args->time_to_eat);
+	philo->is_eating = 0;
+	put_forks(philo);
 }
 
+void	ft_sleep(t_philo *philo)
+{
+	print_mutex(philo, "is sleeping");
+	ft_usleep(philo->args->time_to_sleep);
+}
+
+void	think(t_philo *philo)
+{
+	print_mutex(philo, "is thinking");
+}
