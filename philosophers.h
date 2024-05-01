@@ -35,7 +35,6 @@ typedef struct s_philo
 {
 	int						id;
 	pthread_t				thread;
-	int						is_eating;
 	int						nb_meals;
 	int						*is_dead;
 	u_int64_t				start_time;

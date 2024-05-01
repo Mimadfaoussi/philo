@@ -55,7 +55,6 @@ void	philo_init(t_philo *philos, t_args *args, t_data *data)
 	while (i < args->nb_philos)
 	{
 		philos[i].id = i + 1;
-		philos[i].is_eating = 0;
 		philos[i].nb_meals = 0;
 		philos[i].is_dead = &data->dead;
 		philos[i].start_time = get_precise_time();

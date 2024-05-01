@@ -40,11 +40,9 @@ void	eat(t_philo *philo)
 	}
 	pthread_mutex_lock(philo->right_fork);
 	print_mutex(philo, "has taken a fork");
-	philo->is_eating = 1;
-	print_mutex(philo, "is eating");
 	update_meal(philo);
+	print_mutex(philo, "is eating");
 	ft_usleep(philo->args->time_to_eat);
-	philo->is_eating = 0;
 	put_forks(philo);
 }
 
