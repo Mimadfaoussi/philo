@@ -6,7 +6,7 @@
 /*   By: mfaoussi <mfaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:41:28 by mfaoussi          #+#    #+#             */
-/*   Updated: 2024/05/01 14:47:10 by mfaoussi         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:35:18 by mfaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	threads_philos(t_philo *philo, t_data *data)
 		printf("x_error\n");
 		return ;
 	}
-	thread_creation(philo);
+	if (thread_creation(philo) == 1)
+		return ;
 	thread_joining(philo);
 	if (pthread_join(checker, NULL) != 0)
 	{
